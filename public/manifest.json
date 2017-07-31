@@ -1,0 +1,27 @@
+{
+  "name": "Checklist Bot by Octo",
+  "details":"The Checklist Bot Power-Up allows you to automatically perform tasks associated with checklists in a board : assign a checklists template to the lists, move cards when an item is checked and even have the bot automatically check items. Powered by OCTO Technology (LJE & CDU)",
+  "icon": {
+    "url": "https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FOcto.png?1501074594739"
+  },
+  "author": "OCTO Technology (LJE & CDU)",
+  "capabilities": [
+    "authorization-status",
+    "attachment-sections",
+    "attachment-thumbnail",
+    "board-buttons",
+    "callback",
+    "card-badges",
+    "card-buttons",
+    "card-detail-badges",
+    "card-from-url",
+    "format-url",
+    "show-authorization",
+    "show-settings"
+  ],
+  "connectors": {
+    "iframe": {
+      "url": "./index.html"
+    }
+  }
+}
