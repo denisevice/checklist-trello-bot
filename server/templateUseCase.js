@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const trelloHelper = require('./trelloHelper');
 const _ = require('underscore')
 
+
 module.exports = {
 
     handleCreateUpdateCard: function (trello, webhookAction, templateBoardId, templateListId) {
@@ -28,6 +29,7 @@ function handleSingleCardAction(trello, webhookAction) {
             return getBoardIdFromURLs(urls)
 
         }).then(function (boardId) {
+        
             return trelloHelper.getListIdFromListName(trello, boardId, destBoardName)
 
         }).then(function (sourceListId) {
@@ -40,6 +42,7 @@ function handleSingleCardAction(trello, webhookAction) {
 
 }
 
+
 function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListName) {
 
     const data = webhookAction.data
@@ -50,6 +53,7 @@ function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templat
     templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
 
     return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
+
         .then(function (sourceListId) {
             return syncChecklistFromBoard(trello, webhookAction, sourceListId)
 
