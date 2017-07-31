@@ -2,7 +2,6 @@
  * Created by lje on 31/07/2017.
  */
 var Promise = require('bluebird')
-var _ = require('underscore')
 
 module.exports = {
     getListIdFromListName: function (trello, boardId, listName) {

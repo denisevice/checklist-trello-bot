@@ -1,9 +1,9 @@
 /**
  * Created by lje on 31/07/2017.
  */
-var Trello = require('node-trello');
-var Promise = require('bluebird')
-
+const Trello = require('node-trello');
+const Promise = require('bluebird');
+const templateUseCase = require('./templateUseCase');
 
 module.exports = {
     
@@ -26,7 +26,8 @@ module.exports = {
          if (type == "action_move_card_from_list_to_list" || type == "action_create_card" || type == "action_add_attachment_to_card") {
              console.log('-------------------------')
              console.log('type handle : ', type)
-             handleCreateUpdateCard(trello, webhookAction)
+             templateUseCase.handleCreateUpdateCard(trello, webhookAction, req.query.templateBoardId, req.query.templateListName)
+
          }
          res.end()
 

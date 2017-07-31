@@ -3,14 +3,13 @@
  */
 const Promise = require('bluebird');
 const trelloHelper = require('./trelloHelper');
-
-
+const _ = require('underscore')
 
 module.exports = {
 
-    handleCreateUpdateCard: function (trello, webhookAction) {
+    handleCreateUpdateCard: function (trello, webhookAction, templateBoardId, templateListId) {
         
-        handleGlobalBoardAction(trello, webhookAction)
+        handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId)
             .then(function () {
                 handleSingleCardAction(trello, webhookAction)
             })
@@ -24,7 +23,7 @@ function handleSingleCardAction(trello, webhookAction) {
     const data = webhookAction.data
     const card = data.card
     const destBoardName = data.board.name
-    return getAttachmentURLs(card)
+    return getAttachmentURLs(trello, card)
         .then(function (urls) {
             return getBoardIdFromURLs(urls)
 
@@ -34,26 +33,23 @@ function handleSingleCardAction(trello, webhookAction) {
         }).then(function (sourceListId) {
             return syncChecklistFromBoard(trello, webhookAction, sourceListId)
 
-        }).catch(function (err) {
+        })
+        .catch(function (err) {
             console.log(err)
         })
 
 }
 
+function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListName) {
 
-function handleGlobalBoardAction(trello, webhookAction, req) {
-    const action = req.body.action
-    const boardId = req.query.templateBoardId
-    const listName = req.query.templateListName
-    const data = action.data
+    const data = webhookAction.data
 
 
     const destCardId = data.card.id
-    const sourceListName = listName == '' ? data.board.name : listName
-    const boardId = boardId == '' ? data.board.id : boardId
+    const sourceListName = templateListName == '' ? data.board.name : templateListName
+    templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
 
-    return trelloHelper.getListIdFromListName(trello, boardId, sourceListName)
-
+    return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
         .then(function (sourceListId) {
             return syncChecklistFromBoard(trello, webhookAction, sourceListId)
 
