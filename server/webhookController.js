@@ -1,9 +1,11 @@
 /**
  * Created by lje on 31/07/2017.
  */
-var Trello = require('node-trello');
-var Promise = require('bluebird');
-var templateUseCase = require('./templateUseCase');
+const Trello = require('node-trello');
+const Promise = require('bluebird');
+const templateUseCase = require('./templateUseCase');
+const commandUseCase = require('./commandUseCase');
+
 
 module.exports = {
     
@@ -19,15 +21,26 @@ module.exports = {
              return;
          var type = req.body.action.display.translationKey;
          //console.log(req.body.action)
+
+
          
          const trello = new Trello('910aeb0b23c2e63299f8fb460f9bda36', req.query.token);
          const webhookAction = req.body.action;
 
-         if (type == "action_move_card_from_list_to_list" || type == "action_create_card" || type == "action_add_attachment_to_card") {
+         if (type === "action_move_card_from_list_to_list" || type === "action_create_card" || type === "action_add_attachment_to_card") {
              console.log('-------------------------')
              console.log('type handle : ', type)
              templateUseCase.handleCreateUpdateCard(trello, webhookAction, req.query.templateBoardId, req.query.templateListName)
          }
+
+         else if (type === "action_completed_checkitem"){
+             console.log('-------------------------');
+             console.log('type handle : ', type);
+             commandUseCase.handleItemChecked(trello, webhookAction);
+
+         }
+
+         //else if action_marked_checkitem_incomplete
          res.end()
 
 
@@ -45,7 +58,7 @@ function deleteWebhook(res) {
 
 function checkDisableWebhook(req, res) {
     var action = req.body.action;
-    if (action.type == "disablePlugin" && action.data.plugin.url == "https://" + req.headers.host + "/manifest.json")
+    if (action.type === "disablePlugin" && action.data.plugin.url === "https://" + req.headers.host + "/manifest.json")
         return deleteWebhook(res)
     return false
 

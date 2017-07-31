@@ -54,6 +54,38 @@ module.exports = {
             })
 
         })
-    }
+    },
+
+
+    getBoardIdFromBoardName : function (trello, boardName){
+        console.log("Getting board id ", boardName)
+
+        return new Promise(function(resolve, reject){
+            trello.get("/1/search", {query : boardName, modelTypes : 'boards', board_fields : 'id'}, function(err, data){
+                if(err) return reject(err);
+                resolve(data.boards[0].id)
+            })
+
+        })
+    },
+
+    moveCard : function (trello, idCardSource, idListDest, idBoardDest){
+    console.log("Moving ", idCardSource, "to list ", idListDest, " board ", idBoardDest)
+
+    return new Promise(function(resolve, reject){
+        trello.put("/1/cards/"+idCardSource, { idList : idListDest, idBoard : idBoardDest }, function(err){
+            if(err) return reject(err);
+            resolve()
+        })
+
+    })
+}
+
+
+
+
+
+
+
 
 }
