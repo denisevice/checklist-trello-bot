@@ -7,10 +7,10 @@ const request = require('request');
 
 module.exports = {
     handleItemChecked: function (trello, webhookAction) {
-
-        const checkItem = webhookAction.checkItem;
-        const cardId = webhookAction.card.id;
         const webhookData = webhookAction.data;
+        const checkItem = webhookData.checkItem;
+        const cardId = webhookData.card.id;
+        
         if (checkItem.state === 'incomplete')
             return;
 
@@ -59,9 +59,10 @@ function execList(trello, webhookData, args) {
     const re1 = new RegExp("\"(.*?)\",\"(.*?)\"");
     const re2 = new RegExp("\"(.*?)\"");
 
-    const res1 = re1.exec(checkItem.name);
+    const res1 = re1.exec(args);
 
-    const res2 = re2.exec(checkItem.name);
+    const res2 = re2.exec(args);
+
 
     if (res1 === null && res2 === null)
         return;
