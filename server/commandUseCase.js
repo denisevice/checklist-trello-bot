@@ -15,27 +15,32 @@ module.exports = {
             return;
 
 
+        const checkItemName = checkItem.name;
+        const begin = checkItemName.indexOf('->')+2;
+        const argBegin = checkItemName.indexOf('(', begin);
+        const argEnd = checkItemName.lastIndexOf(')');
+        const args = checkItemName.substr(argBegin+1, argEnd-argBegin-1).trim().split(',');
+        const func = checkItemName.substr(begin, argBegin-begin).trim();
+      
+        console.log('fn', func, 'args', args);
 
-        const re = new RegExp(">(.*)\\((.*)\\)");
-        const res = re.exec(checkItem.name);
-        const fn = res[1].trim();
-        const args = res[2];
-        console.log('fn', fn, 'args', args);
-
-        switch (fn) {
+        switch (func) {
             case "list":
                 execList(trello, webhookData, args);
                 break;
             case "link":
                 execLink(args);
                 break;
+            case "board":
+                execBoard(trello, webhookData, args);
+              break;
+              
 
         }
 
 
     }
 }
-
 
 function execLink(url) {
     const re = new RegExp('\"(.*)\"');
@@ -47,35 +52,48 @@ function execLink(url) {
 }
 
 
+function moveCardFromCommand(trello, cardId, boardId, listName){
+  
+    console.log("found boardId", boardId);
+    trelloHelper.getListIdFromListName(trello, boardId, listName)
+        .then(function (list) {
+            return trelloHelper.moveCard(trello, cardId, list, boardId)
+    })
+
+  
+}
+
 function execList(trello, webhookData, args) {
-    console.log("execList", args);
+    console.log("execList", args[0]);
     const checkItem = webhookData.checkItem;
     const cardId = webhookData.card.id;
 
+    if (checkItem.state === 'incomplete')
+        return;
+    
+    const listName = args[0].trim();
+  console.log('args ', args)
+    return moveCardFromCommand(trello, cardId, webhookData.board.id, listName);
+
+
+}
+
+function execBoard(trello, webhookData, args) {
+    console.log("execBoard", args);
+    const checkItem = webhookData.checkItem;
+    const cardId = webhookData.card.id;
 
     if (checkItem.state === 'incomplete')
         return;
-    //find a better regexp
-    const re1 = new RegExp("\"(.*?)\",\"(.*?)\"");
-    const re2 = new RegExp("\"(.*?)\"");
+    
+    const listName = args[1].trim();
+    const boardName = args[0].trim();
 
-    const res1 = re1.exec(args);
+  
+    return trelloHelper.getBoardIdFromBoardName(trello, boardName)
+    .then(function(boardId){
+    return moveCardFromCommand(trello, cardId, boardId, listName);
 
-    const res2 = re2.exec(args);
-
-
-    if (res1 === null && res2 === null)
-        return;
-
-    const listName = res1 ? res1[1].trim() : res2[1].trim();
-
-    return (res1 ? trelloHelper.getBoardIdFromBoardName(trello, res1[2].trim()) : Promise.resolve(webhookData.board.id))
-        .then(function (boardId) {
-            console.log("found boardId", boardId);
-            trelloHelper.getListIdFromListName(trello, boardId, listName)
-                .then(function (list) {
-                    return trelloHelper.moveCard(trello, cardId, list, boardId)
-                })
-        })
-
+    })
+  
 }

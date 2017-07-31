@@ -51,7 +51,7 @@ function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templat
     const destCardId = data.card.id
     const sourceListName = templateListName == '' ? data.board.name : templateListName
     templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
-
+    
     return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
 
         .then(function (sourceListId) {

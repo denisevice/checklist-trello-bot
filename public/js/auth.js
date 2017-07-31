@@ -10,8 +10,8 @@ $(document).ready(function(){
     console.log(webhooks)
     var pro = [];
     webhooks.forEach(function(webhook){
-      console.log(webhook.idModel,"->" , model, webhook.callbackURL.substr(0,30))
-      if(webhook.idModel == model && webhook.callbackURL.substr(0,30) == "https://checklist-bot.glitch.me")
+      console.log(webhook.idModel,"->" , model, webhook.callbackURL.substr(0,31))
+      if(webhook.idModel == model && webhook.callbackURL.substr(0,31) == "https://checklist-bot.glitch.me")
       pro.push(deleteWebhook(webhook))   
     })//foreach
     return pro
@@ -35,7 +35,7 @@ $(document).ready(function(){
                   
               {'idModel': model, 
                'description' : "Checkbox Template", 
-               'callbackURL' : "https://living-slash.glitch.me/webhooks?templateBoardId="+templateBoardId+"&templateListName="+templateListName+"&token="+Trello.token()
+               'callbackURL' : "https://checklist-bot.glitch.me/webhooks?templateBoardId="+templateBoardId+"&templateListName="+templateListName+"&token="+Trello.token()
               }, 
               function(){ 
                 p.innerHTML+="Webhook creation : OK"

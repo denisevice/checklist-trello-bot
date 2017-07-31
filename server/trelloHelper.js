@@ -63,6 +63,7 @@ module.exports = {
         return new Promise(function(resolve, reject){
             trello.get("/1/search", {query : boardName, modelTypes : 'boards', board_fields : 'id'}, function(err, data){
                 if(err) return reject(err);
+                if(data.boards[0] === undefined) return reject('not found');
                 resolve(data.boards[0].id)
             })
 
