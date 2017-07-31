@@ -59,7 +59,7 @@ function clean(){
 unlink.addEventListener('click', function(e){
   t.board('id').get('id')
   .then(function(boardId){
-    window.open("https://living-slash.glitch.me/auth?model="+boardId+"#deauth")
+    window.open("https://checklist-bot.glitch.me/auth?model="+boardId+"#deauth")
   })
 })
 
