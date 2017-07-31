@@ -3,7 +3,6 @@
  */
 var Promise = require('bluebird')
 
-
 module.exports = {
     getListIdFromListName: function (trello, boardId, listName) {
         return new Promise(function (resolve, reject) {

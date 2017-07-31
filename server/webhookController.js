@@ -1,9 +1,9 @@
 /**
  * Created by lje on 31/07/2017.
  */
-var Trello = require('node-trello');
-var Promise = require('bluebird');
-var templateUseCase = require('./templateUseCase');
+const Trello = require('node-trello');
+const Promise = require('bluebird');
+const templateUseCase = require('./templateUseCase');
 
 module.exports = {
     
@@ -27,6 +27,7 @@ module.exports = {
              console.log('-------------------------')
              console.log('type handle : ', type)
              templateUseCase.handleCreateUpdateCard(trello, webhookAction, req.query.templateBoardId, req.query.templateListName)
+
          }
          res.end()
 
