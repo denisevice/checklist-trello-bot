@@ -24,8 +24,8 @@ app.get("/auth", function(req, res){
     res.render("auth.html", { templateBoardId: req.query.template_board_id, templateListName: req.query.template_list_name, webhookModel : req.query.model });
 });
 
-
 app.all("/webhooks", webhookController.allWebhooks);
+
 
 
 // listen for requests 
