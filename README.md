@@ -2,7 +2,7 @@
 
 ## Description
 
-The **Checklist Bot by OCTO** Power-Up allows you to automatically perform tasks associated with checklists in a board:
+The **Checklist Bot** Power-Up allows you to automatically perform tasks associated with checklists in a board:
 - Add checklists to a card when it is created or moved to a list
 - Perform actions when an item is checked in a checklist:
     - Move the card to a list in the board
@@ -36,6 +36,8 @@ If you want to embed images, this is how you do it:
 
 ## About
 Powered by OCTO Technology, 2017
+
 Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
+
 Code is open-source and available on [Github](https://github.com/louisjeck/checklist-trello-bot) and [Glitch](https://glitch.com/edit/#!/checklist-bot)
 
