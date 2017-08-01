@@ -11,9 +11,7 @@ module.exports = {
     handleCreateUpdateCard: function (trello, webhookAction, templateBoardId, templateListId) {
         
         handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId)
-            .then(function () {
-                handleSingleCardAction(trello, webhookAction)
-            })
+            .then(() => handleSingleCardAction(trello, webhookAction))
     }
 }
 
@@ -25,20 +23,11 @@ function handleSingleCardAction(trello, webhookAction) {
     const card = data.card
     const destBoardName = data.board.name
     return getAttachmentURLs(trello, card)
-        .then(function (urls) {
-            return getBoardIdFromURLs(urls)
-
-        }).then(function (boardId) {
-        
-            return trelloHelper.getListIdFromListName(trello, boardId, destBoardName)
-
-        }).then(function (sourceListId) {
-            return syncChecklistFromBoard(trello, webhookAction, sourceListId)
-
-        })
-        .catch(function (err) {
-            console.log(err)
-        })
+        .then(urls => getBoardIdFromURLs(urls))
+        .then(boardId => trelloHelper.getListIdFromListName(trello, boardId, destBoardName))
+        .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
+  
+        .catch(err => console.log(err))
 
 }
 
@@ -46,18 +35,13 @@ function handleSingleCardAction(trello, webhookAction) {
 function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListName) {
 
     const data = webhookAction.data
-
-
     const destCardId = data.card.id
     const sourceListName = templateListName == '' ? data.board.name : templateListName
     templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
     
     return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
 
-        .then(function (sourceListId) {
-            return syncChecklistFromBoard(trello, webhookAction, sourceListId)
-
-        })
+      .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
 
 }
 
@@ -87,7 +71,7 @@ function syncChecklistFromBoard(trello, webhookAction, sourceListId) {
             ])
         })
 
-        .spread(function (sourceChecklistsList, destChecklistsList) {
+        .spread((sourceChecklistsList, destChecklistsList) => {
             var destChecklistsNames = _.pluck(destChecklistsList, 'name')
             sourceChecklistsList.forEach(function (checklist) {
                 if (destChecklistsNames.indexOf(checklist.name) === -1)
@@ -95,10 +79,8 @@ function syncChecklistFromBoard(trello, webhookAction, sourceListId) {
             })
 
         })
-
-        .catch(function (e) {
-            console.log(e)
-        })
+ 
+        .catch(e => console.log(e))
 
 
 }
