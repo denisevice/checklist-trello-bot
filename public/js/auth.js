@@ -40,7 +40,7 @@ $(document).ready(function(){
               function(){ 
                 p.innerHTML+="Webhook creation : OK"
                 status.innerHTML="ok"
-                window.opener.done(Trello.token())
+                
                 closeTab();
               },
               function(){ 
@@ -86,15 +86,20 @@ $(document).ready(function(){
   var authenticationSuccess = function() { 
     console.log('Successful authentication'); 
     p.innerHTML += "Trello authentication : OK<br>"
-    
+    //closeTab();
     if(window.location.hash.substr(0,7) == "#deauth"){
       clearWebhooks();
       window.opener.clean()
       closeTab();
     }
       
-    else
-      createWebhooks();
+    else{
+      window.opener.done(Trello.token())
+      closeTab();
+
+    }
+
+      //createWebhooks();
 
   };
   

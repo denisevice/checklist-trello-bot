@@ -7,11 +7,10 @@ const _ = require('underscore')
 
 
 module.exports = {
-
-    handleCreateUpdateCard: function (trello, webhookAction, templateBoardId, templateListId) {
+    handleCreateUpdateCard: (trello, webhookAction, templateBoardId, templateListId) => {
         
         handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId)
-            .then(() => handleSingleCardAction(trello, webhookAction))
+        .then(() => handleSingleCardAction(trello, webhookAction))
     }
 }
 
@@ -23,24 +22,25 @@ function handleSingleCardAction(trello, webhookAction) {
     const card = data.card
     const destBoardName = data.board.name
     return getAttachmentURLs(trello, card)
-        .then(urls => getBoardIdFromURLs(urls))
-        .then(boardId => trelloHelper.getListIdFromListName(trello, boardId, destBoardName))
-        .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
-  
-        .catch(err => console.log(err))
+      .then(urls => getBoardIdFromURLs(urls))
+      .then(boardId => trelloHelper.getListIdFromListName(trello, boardId, destBoardName))
+      .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
+
+      .catch(err => console.log(err))
 
 }
 
 
-function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListName) {
-
+function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId) {
+    console.log("handle", templateBoardId, templateListId)
     const data = webhookAction.data
     const destCardId = data.card.id
-    const sourceListName = templateListName == '' ? data.board.name : templateListName
-    templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
-    
-    return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
 
+    templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
+    const sourceListIdPromise = templateListId == '' ? 
+          trelloHelper.getListIdFromListName(trello, templateBoardId, data.board.name) : Promise.resolve(templateListId);
+    
+    return sourceListIdPromise
       .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
 
 }
@@ -64,7 +64,7 @@ function syncChecklistFromBoard(trello, webhookAction, sourceListId) {
 
     return trelloHelper.getCardIdFromCardName(trello, sourceListId, destListName)
 
-        .then(function (sourceCardId) {
+        .then(sourceCardId => {
             return Promise.all([
                 trelloHelper.getChecklistsList(trello, sourceCardId),
                 trelloHelper.getChecklistsList(trello, destCardId)
@@ -73,11 +73,11 @@ function syncChecklistFromBoard(trello, webhookAction, sourceListId) {
 
         .spread((sourceChecklistsList, destChecklistsList) => {
             var destChecklistsNames = _.pluck(destChecklistsList, 'name')
-            sourceChecklistsList.forEach(function (checklist) {
+            
+            sourceChecklistsList.forEach(checklist => {
                 if (destChecklistsNames.indexOf(checklist.name) === -1)
                     copyChecklist(trello, checklist.id, data.card.id)
             })
-
         })
  
         .catch(e => console.log(e))
@@ -89,15 +89,15 @@ function syncChecklistFromBoard(trello, webhookAction, sourceListId) {
 function copyChecklist(trello, idChecklistSource, destCard) {
     console.log("Copying ", idChecklistSource, "to ", destCard)
 
-    return new Promise(function (resolve, reject) {
-        trello.post("/1/checklists/", {
-            idChecklistSource: idChecklistSource,
-            idCard: destCard,
-            pos: 'top'
-        }, function (err) {
-            if (err) return reject(err)
-            resolve();
-        })
+    return new Promise((resolve, reject) => {
+        trello.post("/1/checklists/", 
+            {
+              idChecklistSource: idChecklistSource,
+              idCard: destCard,
+              pos: 'top'
+            }, 
+            err => (err ? reject(err) : resolve())
+        );
 
     })
 }
@@ -107,19 +107,19 @@ function getBoardIdFromURLs(urls) {
     var re = new RegExp("https://trello.com/b/(.*?)/")
 
     for (var url of urls) {
-        var board = re.exec(url)
+        var board = re.exec(url);
         if (board !== null)
-            return board[1]
+            return board[1];
     }
 }
 
 function getAttachmentURLs(trello, card) {
 
-    return new Promise(function (resolve, reject) {
-        trello.get("/1/cards/" + card.id + "/attachments", {fields: 'url'}, function (err, attachments) {
-            if (err) return reject(err)
-            resolve(_.pluck(attachments, 'url'))
-        })
+    return new Promise((resolve, reject) => {
+        trello.get("/1/cards/" + card.id + "/attachments", 
+                   {fields: 'url'}, 
+                   (err, attachments) => (err) ? reject(err) : resolve(_.pluck(attachments, 'url'))
+        );
     })
 
 }

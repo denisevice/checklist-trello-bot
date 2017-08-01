@@ -11,18 +11,24 @@ module.exports = {
         const checkItem = webhookData.checkItem;
         const cardId = webhookData.card.id;
         
-
-
         const checkItemName = checkItem.name;
-        const begin = checkItemName.indexOf('->')+2;
-        const argBegin = checkItemName.indexOf('(', begin);
-        const argEnd = checkItemName.lastIndexOf(')');
-        var args = checkItemName.substr(argBegin+1, argEnd-argBegin-1).split(',');
-        args = args.map(e => e.trim());
-        
-        const func = checkItemName.substr(begin, argBegin-begin).trim();
-      
-        console.log('fn', func, 'args', args);
+
+        const parts = checkItemName.split('->')
+                                   .slice(1)
+                                   .map(e => e.trim());
+        console.log(parts)
+
+        parts.forEach(part => {
+            const argBegin = part.indexOf('(');
+            const argEnd = part.lastIndexOf(')');
+            const args = part.substr(argBegin+1, argEnd-argBegin-1)
+                             .split(',')
+                             .map(e => e.trim());
+
+            const func = part.substr(0, argBegin).trim();
+
+            console.log('fn', func, 'args', args);
+          
       
         if (checkItem.state === 'incomplete'){
             switch (func) {
@@ -60,12 +66,15 @@ module.exports = {
                 break;
               case "archive":
                   execArchive(trello, webhookData);
-
+                break;
 
           }
         }
-    }
-}
+          
+          
+      }) //endForEach
+    } 
+} //module exports
 
 
 function execLink(url) {
