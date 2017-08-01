@@ -32,8 +32,7 @@ module.exports = {
              console.log('type handle : ', type)
              templateUseCase.handleCreateUpdateCard(trello, webhookAction, req.query.templateBoardId, req.query.templateListName)
          }
-
-         else if (type === "action_completed_checkitem"){
+         else if (type === "action_completed_checkitem" || type === "action_marked_checkitem_incomplete"){
              console.log('-------------------------');
              console.log('type handle : ', type);
              commandUseCase.handleItemChecked(trello, webhookAction);
