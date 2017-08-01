@@ -115,14 +115,14 @@ TrelloPowerUp.initialize({
         if(memberStoredId == memberId)
           return t.popup({
             title: 'Settings',
-            url: './authorize.html',
-            height: 250, // we can always resize later, but if we know the size in advance, its good to tell Trello
+            url: './settings.html',
+            height: 250, 
           });
         
           return t.popup({
             title: 'Settings',
-            url: './settings.html',
-            height: 250, // we can always resize later, but if we know the size in advance, its good to tell Trello
+            url: './settingsLocked.html',
+            height: 250, 
         });
     })
     }

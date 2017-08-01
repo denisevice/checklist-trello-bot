@@ -31,14 +31,16 @@ function handleSingleCardAction(trello, webhookAction) {
 }
 
 
-function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListName) {
-
+function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId) {
+    console.log("handle", templateBoardId, templateListId)
     const data = webhookAction.data
     const destCardId = data.card.id
-    const sourceListName = templateListName == '' ? data.board.name : templateListName
+
     templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
+    const sourceListIdPromise = templateListId == '' ? 
+          trelloHelper.getListIdFromListName(trello, templateBoardId, data.board.name) : Promise.resolve(templateListId);
     
-    return trelloHelper.getListIdFromListName(trello, templateBoardId, sourceListName)
+    return sourceListIdPromise
       .then(sourceListId => syncChecklistFromBoard(trello, webhookAction, sourceListId))
 
 }

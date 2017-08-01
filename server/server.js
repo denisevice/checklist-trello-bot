@@ -21,11 +21,14 @@ app.use(express.static('public'));
 app.engine('.html', require('ejs').renderFile);
 app.get("/auth", function(req, res){
     
-    res.render("auth.html", { templateBoardId: req.query.template_board_id, templateListName: req.query.template_list_name, webhookModel : req.query.model });
+    res.render("auth.html", { });
 });
 
 app.all("/webhooks", webhookController.allWebhooks);
 
+app.get("/save", webhookController.saveAction);
+
+app.get("/boards", webhookController.getBoards);
 
 
 // listen for requests 
@@ -33,6 +36,4 @@ var listener = app.listen(process.env.PORT, function () {
   console.info(`Node Version: ${process.version}`);
   console.log('Checklist Bot by Octo Power-Up Server listening on port ' + listener.address().port);
 });
-
-
 
