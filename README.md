@@ -2,19 +2,20 @@
 
 ## Description
 
-The **Checklist Bot by OCTO** Power-Up allows you to automatically perform tasks associated with checklists in a board : 
-- assign checklists templates to each list of the board
-  - each time a card is created or move in a list a checklist will be added if a template exists
+The **Checklist Bot by OCTO** Power-Up allows you to automatically perform tasks associated with checklists in a board:
+- Add checklists to a card when it is created or moved to a list
+- Perform actions when an item is checked in a checklist:
+    - Move the card to a list in the board
+    - Move the card to another board
+    - Assign a label
+    - Archive the card
 
-- perform actions when an item is checked in a checklist:
-  - move the card to a list in the board
-  - move the card to another board
-  - assign a label
-  - archive the card
+You can configure the power-up with the following steps:
+  - Enable the **Checklist Bot by OCTO** in the board
+  - Select the location of the checklists template
+  - Authorize **Checklist Bot by OCTO** to perform automatic tasks on behalf of a unique account
 
-
-Powered by OCTO Technology. 
-
+Powered by OCTO Technology, 2017
 Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
 
 ## Power-up Installation
