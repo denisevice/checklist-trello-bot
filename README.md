@@ -2,14 +2,23 @@
 
 ## Description
 
-The Checklist Bot Power-Up allows you to automatically perform tasks associated with checklists in a board : assign a checklists template to the lists, move cards when an item is checked and even have the bot automatically check items. 
+The **Checklist Bot by OCTO** Power-Up allows you to automatically perform tasks associated with checklists in a board : 
+- assign checklists templates to each list of the board
+  - each time a card is created or move in a list a checklist will be added if a template exists
+
+- perform actions when an item is checked in a checklist:
+  - move the card to a list in the board
+  - move the card to another board
+  - assign a label
+  - archive the card
+
 
 Powered by OCTO Technology. 
 
 Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
 
 ## Power-up Installation
-See Trello documentation
+See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#power-ups-intro) and their [administration](https://trello.com/power-ups/admin)
 
 ## Power-up activation for Trello users
 Once the power-up is available to your team, proceed in the following steps
