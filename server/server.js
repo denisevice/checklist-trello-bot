@@ -31,7 +31,7 @@ app.all("/webhooks", webhookController.allWebhooks);
 // listen for requests 
 var listener = app.listen(process.env.PORT, function () {
   console.info(`Node Version: ${process.version}`);
-  console.log('Trello Power-Up Server listening on port ' + listener.address().port);
+  console.log('Checklist Bot by Octo Power-Up Server listening on port ' + listener.address().port);
 });
 
 
