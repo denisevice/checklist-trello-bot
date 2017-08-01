@@ -13,7 +13,7 @@ var authNode = document.getElementById('authNode');
 var unlink = document.getElementById('unlink');
 
 t.render(function(){
-  t.organization('boards').then(function(r) { console.log(r) })
+
   return Promise.all([
     t.get('board', 'shared', 'template'),
     t.board('id').get('id'),
@@ -26,15 +26,12 @@ t.render(function(){
 
     }
   })
-  .then(function(){
-    
-    t.sizeTo('#content')
-
-  })
+  .then(() => t.sizeTo('#content'))
 });
 
 function done(token){
   console.log('token', token)
+  t.set('board', 'private', 'token', {token : token});
   Promise.all([
   t.board('id').get('id'),
   t.member('fullName', 'id')
@@ -46,8 +43,8 @@ function done(token){
        boardId : boardId
   });
     
-
 })
+  
 }
 
 
