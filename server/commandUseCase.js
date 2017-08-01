@@ -1,4 +1,14 @@
-/**
+/*
+ ** Checklist Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
+ ** Adds automation
+ **
+ ** Credits:
+ ** Louis Jeckel <https://github.com/louisjeck>
+ ** Christophe Durand <https://github.com/Cmbdurand>
+ **
+ ** Powered by OCTO Technology, 34 avenue de l'Opéra, 75002 Paris, France
+ ** www.octo.com
+ **
  * Created by lje on 31/07/2017.
  */
 const Promise = require('bluebird');

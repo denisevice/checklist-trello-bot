@@ -1,5 +1,15 @@
-// server.js
-// where your node app starts
+/*
+ ** Checklist Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
+ ** Adds automation
+ **
+ ** Credits:
+ ** Louis Jeckel <https://github.com/louisjeck>
+ ** Christophe Durand <https://github.com/Cmbdurand>
+ **
+ ** Powered by OCTO Technology, 34 avenue de l'Opéra, 75002 Paris, France
+ ** www.octo.com
+ **
+ */
 
 var compression = require('compression');
 var cors = require('cors');
