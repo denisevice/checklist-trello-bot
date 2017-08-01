@@ -3,8 +3,8 @@
 ## Description
 
 The Checklist Bot Power-Up allows you to automatically perform tasks associated with checklists in a board : assign a checklists template to the lists, move cards when an item is checked and even have the bot automatically check items. 
-Powered by OCTO Technology. 
 
+Powered by OCTO Technology. 
 Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
 
 ## Power-up Installation
