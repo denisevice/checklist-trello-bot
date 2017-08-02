@@ -8,39 +8,35 @@ var templateBoardSelect = document.getElementById('templateBoardSelect');
 var templateListSelect = document.getElementById('templateListSelect');
 const APIKey = "910aeb0b23c2e63299f8fb460f9bda36";
 const trelloAPI = "https://api.trello.com";
-const optionAutomatic = document.createElement("option");
-      optionAutomatic.text = "Auto";
-      optionAutomatic.value = "-1";
-        //optionAutomatic.value = board.id;
 
-var authDiv = document.getElementById('auth');
+
 var saveBtn = document.getElementById('save');
 var disableBtn = document.getElementById('disable');
 
 t.render(() => {
 
-
   return Promise.all([
     t.get('board', 'shared', 'template'),
     t.board('id').get('id'),
   ])
+  
   .spread(function(template, boardId){
-    t.get('board', 'private', 'token').get('token').then(token => {
-      setBoardOptions(token, boardId, template.boardId).then(() => setListOptions(token, template.listId));
-    })
-    if(template){
-     // templateBoardId_input.value = template.boardId;
-      templateListSelect.value = template.listName
-    }
+    
+    t.get('board', 'private', 'token').get('token')
+      .then(token => {
+        setBoardOptions(token, template)
+          .then(() => setListOptions(token, template));
+      }); 
   })
+  
   .then(() => t.sizeTo('#content'))
 });
 
 
 
 
-function setBoardOptions(token, boardId, selected){
-  selected = selected === undefined ? -1 : selected;
+function setBoardOptions(token, template){
+  const selected = template === undefined ? "" : template.boardId;
   var length = templateBoardSelect.options.length;
   for (var i = 0; i < length; i++) {
     templateBoardSelect.options[i] = null;
@@ -49,7 +45,7 @@ function setBoardOptions(token, boardId, selected){
   return getBoardsList(token).then(boards => {
     var boardsSorted = [];
     boardsSorted['Auto'] = [];
-    boardsSorted['Auto'].push({ id : -1, name : "Auto (current board)" })
+    boardsSorted['Auto'].push({ id : "", name : "Auto (current board)" })
     
     boards.forEach(board => {
 
@@ -80,24 +76,17 @@ function setBoardOptions(token, boardId, selected){
 }
 
 
-function clean(){
-  console.log('clean')
-  t.remove('board', 'shared', 'auth')
-}
-
-
-function setListOptions(token, selected){
-  selected = selected === undefined ? -1 : selected;
+function setListOptions(token, template){
+  const selected = template === undefined ? "" : template.listId;
   
   templateListSelect.innerHTML = "";
   
   const boardId = templateBoardSelect.value;
-  return ((boardId == -1) ? t.board('id').get('id') : Promise.resolve(boardId))
+  return ((boardId == "") ? t.board('id').get('id') : Promise.resolve(boardId))
   .then((boardId) => {
-      optionAutomatic.selected = (selected === undefined);
 
       getListsList(token, boardId).then((lists) => {
-        lists.push({id : -1, name : "Auto (current board name)"});
+        lists.push({id : "", name : "Auto (current board name)"});
         lists.forEach((list) => {
           var option = document.createElement("option");
           option.text = list.name;
@@ -105,9 +94,26 @@ function setListOptions(token, selected){
           option.selected = (list.id == selected)
           templateListSelect.appendChild(option);
        }) 
-      });
+    });
   })
 }
+
+function clean(){
+  console.log('clean')
+  Promise.all([
+    t.board('id').get('id'),
+    t.get('board', 'private', 'token').get('token')   
+  ])
+  .spread((boardId, token) => cleanWebooks(token, boardId))
+  .then(() => {
+    return Promise.all([
+      t.remove('board', 'shared', ['auth', 'template']),
+      t.remove('board', 'private', 'token')
+    ])
+  })
+  .then(() => t.closePopup());
+}
+
 
 
 function encodeParams (params){
@@ -116,6 +122,8 @@ function encodeParams (params){
       .map(k => esc(k) + '=' + esc(params[k]))
       .join('&');
 }
+
+
 
 function getBoardsList(token){
   const params = encodeParams({
@@ -130,8 +138,9 @@ function getBoardsList(token){
 
 }
 
-function getListsList(token, boardId){
 
+
+function getListsList(token, boardId){
   const params = encodeParams({
     key : APIKey,
     token : token,
@@ -139,8 +148,75 @@ function getListsList(token, boardId){
   })
   return fetch(trelloAPI+'/1/boards/'+boardId+'/lists?'+params)
   .then(response => (response.json()))
+}
+
+function createWebhook(token, model, template){
+  return cleanWebooks(token, model).then(() => {
+    const params = encodeParams({
+      token : token,
+      key : APIKey,
+      idModel : model,
+      callbackURL : "https://" + window.location.hostname + "/webhooks"
+                              + "?templateBoardId=" + template.boardId
+                              + "&templateListId=" + template.listId
+                              + "&token=" + token
+
+    }) 
+    return fetch(trelloAPI+'/1/webhooks?'+params, {method : 'POST'}).then(response => response.json());
+  })
+}
+
+
+
+
+
+function getMyWebhooks(token, model){
+  const params = encodeParams({
+    token : token,
+    key : APIKey,
+  })
+  
+  const url = window.location.hostname;
+  
+  return fetch(trelloAPI + "/1/tokens/" + token + "/webhooks?" + params)
+    .then(resp => resp.json())
+  
+    .then(webhooks => {
+
+      webhooks = webhooks.filter(webhook => {
+        return (webhook.idModel == model && webhook.callbackURL.substr(8, url.length) == url);
+      })
+      return webhooks
+    })  
+  
+
 
 }
+
+
+function cleanWebooks(token, model){
+  
+  return getMyWebhooks(token, model)
+    .then(webhooks => {
+        var p = [];
+        webhooks.forEach(webhook => p.push(deleteWebhook(token, webhook)));
+        return Promise.all(p)
+    })
+  
+}
+
+
+function deleteWebhook(token, webhook){
+  const params = encodeParams({
+    token : token,
+    key : APIKey,
+  });
+  
+  return fetch(trelloAPI+'/1/webhooks/' + webhook.id + '?' + params, {method : 'DELETE'}).then(response => response.json());
+}
+
+
+
 
 
 templateBoardSelect.addEventListener('change', e => {
@@ -150,19 +226,17 @@ templateBoardSelect.addEventListener('change', e => {
 
 
 disableBtn.addEventListener('click', e => {
-  t.board('id').get('id')
-  .then(function(boardId){
-    window.open("https://" + window.location.hostname + "/auth?model="+boardId+"#deauth")
-  })
+  clean();
 })
 
 
 saveBtn.addEventListener('click', e => {
   e.preventDefault();
-
   return t.set('board', 'shared', 'template', {
     boardId : templateBoardSelect.value,
-    listId : templateListSelect.value 
+    listId : templateListSelect.value,
+    boardName : templateBoardSelect.options[ templateBoardSelect.selectedIndex ].text,
+    listName : templateListSelect.options[ templateListSelect.selectedIndex ].text
   })
   
   .then(() => {
@@ -175,15 +249,8 @@ saveBtn.addEventListener('click', e => {
   })
   
   .spread((model, template, token) => {
-    console.log(model, template, token)
-    fetch("https://" + window.location.hostname + "/save"
-                + "?template_board_id=" + ((template.boardId == -1) ? "" : template.boardId)
-                + "&template_list_id=" + ((template.listId == -1) ? "" : template.listId)
-                + "&model=" + model
-                + "&token=" + token
-                );
-    
-    t.sizeTo('#content')
+
+    createWebhook(token, model, template).then(() => t.closePopup());
     
   });
 

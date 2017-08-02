@@ -56,14 +56,7 @@ module.exports = {
 
     },
   
-    getBoards : (req, res) => {
-       if(req.query.token === undefined) return;
-      const trello = new Trello('910aeb0b23c2e63299f8fb460f9bda36', req.query.token);   
-      
-      trelloHelper.getBoardsList(trello)
-      .then((boards) => res.end(JSON.stringify(boards)));
-     
-    },
+
   
     saveAction : (req, res) => {
       const token = req.query.token;

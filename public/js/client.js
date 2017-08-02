@@ -83,8 +83,7 @@ TrelloPowerUp.initialize({
             t.get('board', 'shared', 'auth')
           ])
           .spread(function (boardId, auth) {
-          
-            if(auth !== undefined &&  boardId == auth.boardId)
+            if(auth !== undefined &&  boardId == auth.boardId) //check if board has been copied
               return { authorized: true }
             return { authorized: false };
 

@@ -140,70 +140,8 @@ deleteLabel : (trello, cardId, labelId) => {
   })
 },
   
-  
-saveWebhook : (trello, model, url) => {
-  
-  return getMyWebhooks (trello, model, url.substr(0, url.indexOf('/', 8)))
-  .then(webhooks => {
-    var p = [];
-    webhooks.forEach(webhook => p.push(deleteWebhook(trello, webhook)));
-    return Promise.all(p)
-    
-  })
-  .then(() => {
-    createWebhook(trello, model, url);
-    
-  })
-  
-},
-  
-getBoardsList : (trello) => {
-  return new Promise((resolve, reject) => {
-    trello.get("/1/members/me/boards", {fields : 'name, id'}, (err, boards) => {
-        console.log("list boards", err, boards);
-        return (err) ? reject(err) : resolve(boards);
-    })
-  });
-  
-},
-  
-getListsFromBoard : (trello, boardId) => {
-  return new Promise((resolve, reject) => {
-    trello.get("/1/boards/"+boardId+"/lists/", {fields : 'name, id'}, (err, lists) => {
-        console.log("list lists", err, lists);
-        return (err) ? reject(err) : resolve(lists);
-    })
-  }); 
-  
-}
 
 } //module exports
 
 
 
-function createWebhook(trello, model, url){
-    trello.post("/1/webhooks", {
-      'idModel': model, 
-      'description' : "Checkbox Template", 
-      'callbackURL' : url  
-    }, (err) => (err ? err : "webhook created"));
-}
-
-function deleteWebhook(trello, webhook){
-    console.log("deleting webhook", webhook.id)
-    return new Promise((resolve) => {
-      trello.del("/1/webhooks/"+webhook.id, () => resolve())
-    })
-}
-
-function getMyWebhooks (trello, model, url) {
-    return new Promise(function(resolve){
-      trello.get("/1/tokens/"+trello.token+"/webhooks", (err, webhooks) => {
-        webhooks = webhooks.filter(webhook => {
-          return (webhook.idModel == model && webhook.callbackURL.substr(0, url.length) == url)
-        })
-                
-        resolve(webhooks)
-      })
-    })
-}

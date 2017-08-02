@@ -29,16 +29,12 @@ app.use(express.static('public'));
 
 
 app.engine('.html', require('ejs').renderFile);
-app.get("/auth", function(req, res){
-    
-    res.render("auth.html", { });
-});
 
 app.all("/webhooks", webhookController.allWebhooks);
 
-app.get("/save", webhookController.saveAction);
 
-app.get("/boards", webhookController.getBoards);
+
+
 
 
 // listen for requests 
