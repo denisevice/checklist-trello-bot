@@ -45,7 +45,13 @@ Card templates are usually stored in a list containing all the templates associa
 Once you've told **Check Bot** where to look for the template you are all set
 
 ## Demo board
-If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board
+If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board.
+
+Then proceed with the following steps:
+1. Install the Check Bot power-up
+1. Add Check Bot to the board
+1. Authorize the power-up
+1. Configure the template locations
 
 ## Power-up Installation
 See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#power-ups-intro) and their [administration](https://trello.com/power-ups/admin)
