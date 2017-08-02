@@ -42,15 +42,6 @@ module.exports = {
       
         if (checkItem.state === 'incomplete'){
             switch (func) {
-              case "list":
-                  //execList(trello, webhookData, args);
-                  break;
-              case "link":
-                  //execLink(args);
-                  break;
-              case "board":
-                  //execBoard(trello, webhookData, args);
-                break;
               case "label":
                   execRemoveLabel(trello, webhookData, args);
                 break;

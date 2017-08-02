@@ -54,34 +54,9 @@ module.exports = {
          //else if action_marked_checkitem_incomplete
          res.end()
 
-    },
-  
-    getBoards : (req, res) => {
-       if(req.query.token === undefined) return;
-      const trello = new Trello('910aeb0b23c2e63299f8fb460f9bda36', req.query.token);   
-      
-      trelloHelper.getBoardsList(trello)
-      .then((boards) => res.end(JSON.stringify(boards)));
-     
-    },
-  
-    saveAction : (req, res) => {
-      const token = req.query.token;
-
-      if(token === undefined) return;
-      const trello = new Trello('910aeb0b23c2e63299f8fb460f9bda36', token);
-      const templateBoardId = req.query.template_board_id;
-      const templateListId = req.query.template_list_id;
-      const model = req.query.model;
-      console.log("model", model, "token", "data", templateBoardId, templateListId)
-      const url = "https://checklist-bot.glitch.me/webhooks"
-                            + "?templateBoardId=" + templateBoardId
-                            + "&templateListId=" + templateListId
-                            + "&token=" + token;
-      trelloHelper.saveWebhook(trello, model, url) 
-      res.end();
-      
     }
+  
+
 
 }
 
