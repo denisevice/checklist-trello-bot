@@ -15,6 +15,8 @@ The **Check Bot** Power-Up adds new features to a Trello board:
 At OCTO we have developped this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!\n
 If you use Trello for process management, check it out:
 
+![Screenshot](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FNScreen1.jpg?1501683458765)
+
 ## Why use checklist templates?
 - Users love it! 
   - Checklists are added only when needed.
@@ -58,11 +60,6 @@ Once the power-up is available to your team, proceed in the following steps
 ## Installation
 
 The power-up is a NodeJs application
-
-
-If you want to embed images, this is how you do it:
-
-![Image of Yaktocat](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FScreen1.png?1501597361969)
 
 ## About
 Powered by OCTO Technology, 2017 \n
