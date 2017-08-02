@@ -12,10 +12,10 @@ The **Checklist Bot** Power-Up adds new features to a Trello board:
     - Assign a label
     - Archive the card
 
-At OCTO we have developped this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!
+At OCTO we have developped this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!\n
+If you use Trello for process management, check it out:
 
 ## Why use checklist templates?
-If you use Trello for process management, check it out:
 - Users love it! 
   - Checklists are added only when needed.
   - New checklists are added on top and clearly show the required actions
@@ -34,24 +34,16 @@ If you use Trello for process management, check it out:
   
 ## Why call it a bot?
 Automatic actions are performed by the Trello user who authorized the **Checklist bot** power-up.
-Once properly configured, the "bot" acts in the background 
+Once properly configured, the "bot" acts in the background until desactived.\n
+The bot can be started by any user who joined the board.
 
 ## How do templates work?
 A checklist template is simply a card bearing the name of a list and containing one or more checklists.
 Card templates are usually stored in a list containing all the templates associated a board.
 Once you've told **Checklist Bot** where to look for the template you are all set
 
-## Why use checklist templates ?
-Checklists in Trello are great 
-
-## Why use checklist templates ?
-You can configure the power-up with the following steps:
-  - Enable the **Checklist Bot** in the board
-  - Select the location of the checklists template
-  - Authorize **Checklist Bot** to perform automatic tasks on behalf of a unique account
-
-## How can I try it?
-Checklists in Trello are great 
+## Demo board
+If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board
 
 ## Power-up Installation
 See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#power-ups-intro) and their [administration](https://trello.com/power-ups/admin)
