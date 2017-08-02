@@ -1,45 +1,54 @@
-# Checklist Bot documentation
+# Checklist Bot
 
-## Description
+## Introduction
 
-The **Checklist Bot** Power-Up allows you to automatically perform some tasks associated with checklists in a board:
-- Use Checklist templates to automatically add checklists to a card when it is created or moved to a list
-- Perform actions when an item is checked in a checklist:
-    - Move the card to a list in the board
+The **Checklist Bot** Power-Up adds new features to a Trello board:
+- **Checklist templating**
+    - assign a checklist *template* to each list
+    - automatically add the *template*'s checklists to any card added or moved to a list
+- **Automated actions on check** when an item is checked in a checklist such as:
+    - Move the card to another list in the board
     - Move the card to another board
     - Assign a label
     - Archive the card
 
+At OCTO we have developped this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!
+
+## Why use checklist templates?
+If you use Trello for process management, check it out:
+- Users love it! 
+  - Checklists are added only when needed.
+  - New checklists are added on top and clearly show the required actions
+- Process designers love it!
+  - Templates can be stored in the board or grouped in a separate board
+  - It is a great way to setup and document your process
+  - Changes are available immediately
+
+## Why automate actions when an item is checked?
+- Users love it! 
+  - It is simpler than using the *move* or *archive* card buttons
+  - No need to think about what to do next
+- Process designers love it!
+  - You can easily embed some process logic in the cards and avoid using Zapier integrations
+  - It works when items are checked via the API
+  
+## Why call it a bot?
+Automatic actions are performed by the Trello user who authorized the **Checklist bot** power-up.
+Once properly configured, the "bot" acts in the background 
+
+## How do templates work?
+A checklist template is simply a card bearing the name of a list and containing one or more checklists.
+Card templates are usually stored in a list containing all the templates associated a board.
+Once you've told **Checklist Bot** where to look for the template you are all set
+
+## Why use checklist templates ?
+Checklists in Trello are great 
+
+## Why use checklist templates ?
 You can configure the power-up with the following steps:
   - Enable the **Checklist Bot** in the board
   - Select the location of the checklists template
   - Authorize **Checklist Bot** to perform automatic tasks on behalf of a unique account
-
-## Why use checklist templates?
-- Users love it! 
-  - Checklists are added only when needed.
-  - New checklists appear on top
-- Process designers love it!
-  - It is a great way to setup and document a process
-  - Templates store in a single place the details of a process or a set of processes
-  - You can at the same time program and document your process in a single place
-  - Templates can be stored in the board or grouped in a separate board
-
-## How do templates work?
-A checklist template is simply a card bearing the name of a list and containing one or more checklists.
-Each template is usually store in a list containing templates associated to the lists of a board.
-Once you've told **Checklist Bot** where to look for the template you are all set
-
-## Why ?
-A checklist template is simply a card bearing the name of a list and containing one or more checklists.
-Each template is usually store in a list containing templates associated to the lists of a board.
-Once you've told **Checklist Bot** where to look for the template you are all set
-
-## Why use checklist templates ?
-Checklists in Trello are great 
-
-## Why use checklist templates ?
-Checklists in Trello are great 
 
 ## How can I try it?
 Checklists in Trello are great 
