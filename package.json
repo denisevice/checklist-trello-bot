@@ -1,7 +1,7 @@
 {
-  "name": "ChecklistBotPowerUp",
+  "name": "CheckBotPowerUp",
   "version": "0.0.1",
-  "description": "The Checklist Bot Power-Up allows you to automatically perform tasks associated with checklists",
+  "description": "The Check Bot Power-Up allows you to automatically perform tasks associated with checklists",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js"

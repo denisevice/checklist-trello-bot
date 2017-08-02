@@ -1,8 +1,8 @@
-# Checklist Bot
+# Check Bot
 
 ## Introduction
 
-The **Checklist Bot** Power-Up adds new features to a Trello board:
+The **Check Bot** Power-Up adds new features to a Trello board:
 - **Checklist templating**
     - assign a checklist *template* to each list
     - automatically add the *template*'s checklists to any card added or moved to a list
@@ -33,14 +33,14 @@ If you use Trello for process management, check it out:
   - It works when items are checked via the API
   
 ## Why call it a bot?
-Automatic actions are performed by the Trello user who authorized the **Checklist bot** power-up.
+Automatic actions are performed by the Trello user who authorized the **Check bot** power-up.
 Once properly configured, the "bot" acts in the background until desactived.\n
 The bot can be started by any user who joined the board.
 
 ## How do templates work?
 A checklist template is simply a card bearing the name of a list and containing one or more checklists.
 Card templates are usually stored in a list containing all the templates associated a board.
-Once you've told **Checklist Bot** where to look for the template you are all set
+Once you've told **Check Bot** where to look for the template you are all set
 
 ## Demo board
 If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board
@@ -51,9 +51,9 @@ See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#
 ## Power-up activation for Trello users
 Once the power-up is available to your team, proceed in the following steps
 
-1. Activate "Checklist Bot by OCTO" for your board
+1. Activate "Check Bot by OCTO" for your board
 
-1. Setup your account as "Checklist Bot by OCTO"
+1. Setup your account as "Check Bot by OCTO"
 
 ## Installation
 

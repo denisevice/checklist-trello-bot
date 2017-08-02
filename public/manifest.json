@@ -1,6 +1,6 @@
 {
-  "name": "Checklist Bot",
-  "details":"The Checklist Bot Power-Up allows you to automatically perform tasks associated with checklists in a board : \n - assign a checklists template to the lists - move cards when an item is checked and even have the bot automatically check items. Powered by OCTO Technology (LJE & CDU)",
+  "name": "Check Bot",
+  "details":"The Check Bot Power-Up allows you to automatically perform tasks associated with checklists in a board : \n - assign a checklists template to the lists - move cards when an item is checked and even have the bot automatically check items. Powered by OCTO Technology (LJE & CDU)",
   "details2": "Raise your productivity with **[Butler for Trello](https://butlerfortrello.com)**:\n\n- Customize Trello with buttons that perform your favorite actions on a card or on the board.\n\n- The Butler automatically analyzes your recent usage and recommends buttons to save you clicks and time.\n\n- Sort lists by due date, title, time in list, votes, labels or the value of a custom field.\n\n- Create/copy/move/archive cards, add labels/checklists/due dates, assign to a member, and much more.\n\n##Screenshots##\n\n![Card Buttons](https://butlerfortrello.com/img/screenshot-card-button.png)\n\n\n\n![Powerup](https://butlerfortrello.com/img/screenshot-powerup.png)\n\n",
 
   "icon": {
