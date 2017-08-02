@@ -53,19 +53,15 @@ Then proceed with the following steps:
 1. Authorize the power-up
 1. Configure the template locations
 
-## Power-up Installation
+## Install the Check Bot power-up
+Check Bot will soon be available directly from Trello.
+Meanwhile you can add the power-up for your team using the [administration site](https://trello.com/power-ups/admin)
+Please use as the **Manifest URL** the following value: https://checklist-bot.glitch.me/manifest.json
+
 See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#power-ups-intro) and their [administration](https://trello.com/power-ups/admin)
 
-## Power-up activation for Trello users
-Once the power-up is available to your team, proceed in the following steps
-
-1. Activate "Check Bot by OCTO" for your board
-
-1. Setup your account as "Check Bot by OCTO"
-
-## Installation
-
-The power-up is a NodeJs application
+## Advanced Installation
+TODO
 
 ## About
 Powered by OCTO Technology, 2017 \n
