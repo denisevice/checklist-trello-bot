@@ -3,16 +3,17 @@
 
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
-var authNode = document.getElementById('authNode');
+var auth = document.getElementById('auth');
 
 
 t.render(() => t.sizeTo('#content'));
 
 function done(err, token){
   if(err){
-
-    return;
+    t.closePopup();
+    return;  
   }
+  
   t.set('board', 'private', 'token', {token : token});
 
   Promise.all([
@@ -26,17 +27,17 @@ function done(err, token){
     });  
   })
   .then(() => 
-        t.popup({
-            title: 'Settings',
-            url: './settings.html',
-            height: 250, 
-        }));
+      t.popup({
+          title: 'Settings',
+          url: './settings.html',
+          height: 250, 
+      }));
   
 }
 
 
 
-authNode.addEventListener('click', function(e){
+auth.addEventListener('click', function(e){
   return t.board('id').get('id')
     .then(model => {
       window.open("https://" + window.location.hostname + "/auth", '_blank')

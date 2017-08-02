@@ -24,12 +24,19 @@ app.use(compression());
 // your manifest must have appropriate CORS headers, you could also use '*'
 app.use(cors({ origin: 'https://trello.com' }));
 app.use( bodyParser.json() );
+
+
 app.use(express.static('public'));
 
+//Files located in /views are rendered with the API KEY
 app.engine('.html', require('ejs').renderFile);
+
 app.get("/auth", function(req, res){
-    
     res.render("auth.html", { APIKEY: process.env.APIKEY});
+});
+
+app.get("/settings.html", function(req, res){
+    res.render("settings.html", { APIKEY: process.env.APIKEY});
 });
 
 

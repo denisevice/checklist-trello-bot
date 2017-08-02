@@ -65,7 +65,9 @@ If you want to embed images, this is how you do it:
 ![Image of Yaktocat](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FScreen1.png?1501597361969)
 
 ## About
-Powered by OCTO Technology, 2017 \n
-Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux \n
+Powered by OCTO Technology, 2017
+
+Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
+
 Code is open-source and available on [Github](https://github.com/louisjeck/checklist-trello-bot) and [Glitch](https://glitch.com/edit/#!/checklist-bot)
 
