@@ -39,7 +39,7 @@ function done(err, token){
 authNode.addEventListener('click', function(e){
   return t.board('id').get('id')
     .then(model => {
-      window.open("https://" + window.location.hostname + "/auth.html", '_blank')
+      window.open("https://" + window.location.hostname + "/auth", '_blank')
       t.sizeTo('#content')
 
     });

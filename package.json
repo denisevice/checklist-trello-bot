@@ -1,22 +1,21 @@
 {
   "name": "CheckBotPowerUp",
-  "version": "0.0.1",
+  "version": "2.1.0",
   "description": "The Check Bot Power-Up allows you to automatically perform tasks associated with checklists",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js"
   },
   "dependencies": {
-    "compression": "1.6.2",
-    "cors": "^2.8.1",
-    "express": "^4.15.2",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
     "request": "^2.81.0",
     "body-parser": "^1.17.2",
-    "airtable": "^0.5.0",
     "node-trello": "^1.2.1",
-    "ejs": "^2.5.6",
     "underscore": "^1.8.3",
-    "bluebird": "^3.5.0"
+    "bluebird": "^3.5.0",
+    "ejs": "^2.5.7"
   },
   "engines": {
     "node": "4.4.5"

@@ -26,9 +26,14 @@ app.use(cors({ origin: 'https://trello.com' }));
 app.use( bodyParser.json() );
 app.use(express.static('public'));
 
-
-
 app.engine('.html', require('ejs').renderFile);
+app.get("/auth", function(req, res){
+    
+    res.render("auth.html", { APIKEY: process.env.APIKEY});
+});
+
+
+
 
 app.all("/webhooks", webhookController.allWebhooks);
 
