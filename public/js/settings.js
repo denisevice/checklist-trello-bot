@@ -14,22 +14,37 @@ var saveBtn = document.getElementById('save');
 var disableBtn = document.getElementById('disable');
 
 t.render(() => {
-
-  return Promise.all([
-    t.get('board', 'shared', 'template'),
-    t.board('id').get('id'),
-  ])
   
-  .spread(function(template, boardId){
-    
-    t.get('board', 'private', 'token').get('token')
-      .then(token => {
-        setBoardOptions(token, template)
-          .then(() => setListOptions(token, template));
-      }); 
+  t.get('board', 'private', 'token')
+  .then(token => {
+    if(token === undefined) {
+      return t.popup({
+            title: 'Authorize Checklist Template',
+            url: './authorize.html', // this page doesn't exist in this project but is just a normal page like settings.html
+            height: 250,
+      });
+    }
+    else return;
   })
+  .then(() => {
   
-  .then(() => t.sizeTo('#content'))
+    return Promise.all([
+      t.get('board', 'shared', 'template'),
+      t.board('id').get('id'),
+    ])
+
+    .spread(function(template, boardId){
+
+      t.get('board', 'private', 'token')
+        .then(token => {
+        if(token === undefined) return;
+          setBoardOptions(token.token, template)
+            .then(() => setListOptions(token.token, template));
+        }); 
+    })
+
+    .then(() => t.sizeTo('#content'))
+  })
 });
 
 
@@ -98,21 +113,6 @@ function setListOptions(token, template){
   })
 }
 
-function clean(){
-  console.log('clean')
-  Promise.all([
-    t.board('id').get('id'),
-    t.get('board', 'private', 'token').get('token')   
-  ])
-  .spread((boardId, token) => cleanWebooks(token, boardId))
-  .then(() => {
-    return Promise.all([
-      t.remove('board', 'shared', ['auth', 'template']),
-      t.remove('board', 'private', 'token')
-    ])
-  })
-  .then(() => t.closePopup());
-}
 
 
 
@@ -212,7 +212,8 @@ function deleteWebhook(token, webhook){
     key : APIKey,
   });
   
-  return fetch(trelloAPI+'/1/webhooks/' + webhook.id + '?' + params, {method : 'DELETE'}).then(response => response.json());
+  return fetch(trelloAPI+'/1/webhooks/' + webhook.id + '?' + params, {method : 'DELETE'})
+    .then(response => response.json());
 }
 
 
@@ -225,13 +226,28 @@ templateBoardSelect.addEventListener('change', e => {
 });
 
 
+
 disableBtn.addEventListener('click', e => {
-  clean();
+  
+  Promise.all([
+    t.board('id').get('id'),
+    t.get('board', 'private', 'token').get('token')   
+  ])
+  
+  .spread((boardId, token) => cleanWebooks(token, boardId))
+  
+  .then(() => {
+    return Promise.all([
+      t.remove('board', 'shared', ['auth', 'template']),
+      t.remove('board', 'private', 'token')
+    ])
+  })
+  .then(() => t.closePopup());
+
 })
 
 
 saveBtn.addEventListener('click', e => {
-  e.preventDefault();
   return t.set('board', 'shared', 'template', {
     boardId : templateBoardSelect.value,
     listId : templateListSelect.value,
@@ -244,14 +260,12 @@ saveBtn.addEventListener('click', e => {
       t.board('id').get('id'),
       t.get('board', 'shared', 'template'),
       t.get('board', 'private', 'token').get('token')
-    ])
-      
+    ])   
   })
   
   .spread((model, template, token) => {
-
-    createWebhook(token, model, template).then(() => t.closePopup());
     
+    createWebhook(token, model, template).then(() => t.closePopup());   
   });
 
 });
