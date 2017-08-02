@@ -64,7 +64,9 @@ See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#
 TODO
 
 ## About
-Powered by OCTO Technology, 2017 \n
-Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux \n
+Powered by OCTO Technology, 2017
+
+Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
+
 Code is open-source and available on [Github](https://github.com/louisjeck/checklist-trello-bot) and [Glitch](https://glitch.com/edit/#!/checklist-bot)
 

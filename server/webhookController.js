@@ -35,7 +35,7 @@ module.exports = {
          //console.log(req.body.action)
         
          if(req.query.token === undefined) return;
-         const trello = new Trello('910aeb0b23c2e63299f8fb460f9bda36', req.query.token);
+         const trello = new Trello(process.env.APIKEY, req.query.token);
        
          const webhookAction = req.body.action;
 

@@ -6,7 +6,7 @@ var t = TrelloPowerUp.iframe();
 
 var templateBoardSelect = document.getElementById('templateBoardSelect');
 var templateListSelect = document.getElementById('templateListSelect');
-const APIKey = "910aeb0b23c2e63299f8fb460f9bda36";
+
 const trelloAPI = "https://api.trello.com";
 
 
