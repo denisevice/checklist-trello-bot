@@ -107,7 +107,7 @@ If you select another list from the template board in the drop down menu, Checkl
 ## Security topics
 We have designed the **Checklist Bot Power-Up** with security in mind.
 The bot can be started by any member of the board.
-It then acts on behalf of this user and inherits his access rights. Any unauthorized access to a board or an action will simply be discarded.
+It then acts on behalf of this user and inherits her°his access rights. Any unauthorized access to a board or an action will simply be discarded.
 When the user grants its authorization, the token is stored in the private settings of the power-up and is not available to other users on the client side.
 
 The back-end is coded in NodeJs with Trello webhooks. What happens on this side should be trusted.
@@ -118,10 +118,10 @@ That's why we have chosen to make the code public and open-source.
 The code is open-source and available on [Github](https://github.com/louisjeck/checklist-trello-bot) and [Glitch](https://glitch.com/edit/#!/checklist-bot)
 
 We have chosen to open-source it for many reasons:
-- it can be used as a source of education for other students and pros
-- it gives visibility for Louis (who's looking for an internship next summer in Southern California) and OCTO Technology
-- it can help detect and solve potential security leaks
-- we welcome future contributors
+- use it as a source of education for other students and pros
+- give visibility to Louis (who's looking for an internship next summer in Southern California) and OCTO Technology
+- help detect and solve potential security leaks
+We welcome future contributors. Please contact us or send us pull requests ;-)
 
 ## Credits
 Powered by OCTO Technology, 2017
