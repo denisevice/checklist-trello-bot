@@ -1,5 +1,5 @@
 /*
- ** Check Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
+ ** Checklist Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
  ** Adds automation
  **
  ** Credits:
@@ -52,6 +52,6 @@ app.all("/webhooks", webhookController.allWebhooks);
 // listen for requests 
 var listener = app.listen(process.env.PORT, function () {
   console.info(`Node Version: ${process.version}`);
-  console.log('Check Bot by Octo Power-Up Server listening on port ' + listener.address().port);
+  console.log('Checklist Bot by Octo Power-Up Server listening on port ' + listener.address().port);
 });
 

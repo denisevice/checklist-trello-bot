@@ -1,5 +1,5 @@
 /*
- ** Check Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
+ ** Checklist Bot Power-Up - https://github.com/louisjeck/checklist-trello-bot
  ** Adds automation
  **
  ** Credits:
