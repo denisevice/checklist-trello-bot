@@ -42,19 +42,21 @@ If you use Trello for process management, check it out:
 
 *Screenshot 2: When a card is created in the Inbox list, the bot automatically adds the Inbox checklist. Actions such as move, archive card or add label are available*
 
-## Why call it a bot?
+## Why do call it a bot?
 Automatic actions are performed by the Trello user who authorized the **Checklist bot** power-up.
-Once properly configured, the "bot" acts in the background until desactived.\n
-The bot can be started by any user who joined the board.
+Once properly configured, the "bot" acts in the background until desactived.
+
+The bot can be started by any member of the board.
+It then acts on behalf of this user and inherits his access rights. Any unauthorized access to a board or an action will simply be discarded.
 
 ## How do templates work?
 A checklist template is simply a card bearing the name of a list and containing one or more checklists.
 Card templates are usually stored in a list containing all the templates associated a board.
 Once you've told **Checklist Bot** where to look for the template you are all set
 
-## How do setup bot actions?
-Just add each action after the keyword "->" in text associated to the checklist item.
-Checklist Bot can detect and launch the following actions:
+## How can you setup bot actions?
+Checklist Bot detects actions after the keyword "->" in text associated to checklist items.
+The following actions can be detected and launched:
 
 Action | Description | Syntax 
 ------------ | ------------- | ----------------
