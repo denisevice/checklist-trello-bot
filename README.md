@@ -129,8 +129,8 @@ www.octo.com
 
 Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
 
-The concept of checklist templates was inspired by [Iain Brown' s Little Blue Monkey Pimp Your Trello Cards] (http://www.littlebluemonkey.com/pimp-your-trello-cards/) implemented on Google sheet. 
+The concept of checklist templates was inspired by [Iain Brown' s Little Blue Monkey Pimp Your Trello Cards](http://www.littlebluemonkey.com/pimp-your-trello-cards/) implemented on Google sheet. 
 
-Thanks [Iain](https://twitter.com/littlebmonkey) for making it available and open source!
+Thanks [Iain](https://twitter.com/littlebmonkey) for making it available and open source back in 2013!
 
 
