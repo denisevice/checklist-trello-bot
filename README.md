@@ -12,10 +12,13 @@ The **Checklist Bot** Power-Up adds new features to a Trello board:
     - Assign a label
     - Archive the card
 
-At OCTO we have developped this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!\n
+At OCTO Technology we have developed this power-up for internal use (HR hiring) and for our customers (Factory workshops management, Administrative processes) and share it with you!
+
 If you use Trello for process management, check it out:
 
 ![Screenshot](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FNScreen1.jpg?1501683458765)
+
+*Checklist Bot setup : choose the location of the templates - in this case, the first list called "Template" stores the checklists templates*
 
 ## Why use checklist templates?
 - Users love it! 
