@@ -59,12 +59,12 @@ Checklist Bot can detect and launch the following actions:
 Action | Description | Syntax 
 ------------ | ------------- | ----------------
 list| Move the card to a list | **list**(*listName, position*)
-  |  |   | *listName: name of the target list
-  |  |   | (optional): position: location in the list the card will move. Possible values are **top** and **bottom** (default)*
+  |  |   | listName: name of the target list
+  |  |   | (optional): position: location in the list the card will move. Possible values are **top** and **bottom** (default)
 board| Move the card to a list in another board | **board**(*boardName, listName, position*)
-  |  |   | *boardName: name of the target board 
+  |  |   | boardName: name of the target board 
   |  |   | listName: name of the target list 
-  |  |   | (optional): position: location in the list the card will move. Possible values are **top** and **bottom** (default)*  
+  |  |   | (optional): position: location in the list the card will move. Possible values are **top** and **bottom** (default)
 
 ## Demo board
 If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board.
