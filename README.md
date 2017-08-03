@@ -16,9 +16,9 @@ At OCTO Technology we have developed this power-up for internal use (HR hiring) 
 
 If you use Trello for process management, check it out:
 
-![Screenshot](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FNScreen1.jpg?1501683458765)
+![Screenshot1](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FNScreen1.jpg?1501683458765)
 
-*Checklist Bot setup : choose the location of the templates - in this case, the first list called "Template" stores the checklists templates*
+*Screenshot 1: Checklist Bot setup : choose the location of the templates - in this case, the first list called "Template" stores the checklists templates*
 
 ## Why use checklist templates?
 - Users love it! 
@@ -37,6 +37,11 @@ If you use Trello for process management, check it out:
   - You can easily embed some process logic in the cards and avoid using Zapier integrations
   - It works when items are checked via the API
   
+
+![Screenshot2](https://cdn.glitch.com/9aebe639-1af4-4ed8-9467-a054ae8cdf2b%2FCheckbot%201step.jpg?1501762939721)
+
+*Screenshot 2: When a card is created in the Inbox list, the bot automatically adds the Inbox checklist. Actions such as move, archive card or add label are available*
+
 ## Why call it a bot?
 Automatic actions are performed by the Trello user who authorized the **Checklist bot** power-up.
 Once properly configured, the "bot" acts in the background until desactived.\n
@@ -46,6 +51,14 @@ The bot can be started by any user who joined the board.
 A checklist template is simply a card bearing the name of a list and containing one or more checklists.
 Card templates are usually stored in a list containing all the templates associated a board.
 Once you've told **Checklist Bot** where to look for the template you are all set
+
+## How do setup bot actions?
+Just add each action after the keyword "->" in text associated to the checklist item.
+Checklist Bot can detect and launch the following actions:
+
+Action name | Description | Syntax 
+------------ | ------------- | ----------------
+list| move the card to list "listname" at position bottom or top | list(listname, top)
 
 ## Demo board
 If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board.
