@@ -121,6 +121,7 @@ We have chosen to open-source it for many reasons:
 - use it as a source of education for other students and pros
 - give visibility to Louis (who's looking for an internship next summer in Southern California) and OCTO Technology
 - help detect and solve potential security leaks
+
 We welcome future contributors. Please contact us or send us pull requests ;-)
 
 ## Credits
@@ -132,5 +133,6 @@ Design & code by Louis Jeckel, Christophe Durand and Aurélien Rambaux
 The concept of checklist templates was inspired by [Iain Brown' s Little Blue Monkey Pimp Your Trello Cards](http://www.littlebluemonkey.com/pimp-your-trello-cards/) implemented on Google sheet. 
 
 Thanks [Iain](https://twitter.com/littlebmonkey) for making it available and open source back in 2013!
+
 
 
