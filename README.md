@@ -1,4 +1,4 @@
-# Checklist Bot
+# Checklist Bot documentation
 
 ## Introduction
 
@@ -84,12 +84,25 @@ Then proceed with the following steps:
 ## Install the Checklist Bot power-up
 Checklist Bot will soon be available directly from Trello.
 Meanwhile you can add the power-up for your team using the [administration site](https://trello.com/power-ups/admin)
-Please use as the **Manifest URL** the following value: https://checklist-bot.glitch.me/manifest.json
+
+Checklist Bot is served on Glitch and you can use the following **Manifest URL** the following value: https://checklist-bot.glitch.me/manifest.json
+
+You are also free to remix the [Glitch project](https://glitch.com/edit/#!/checklist-bot) and use your own manifest or serve the power-up from your own NodeJs server.
 
 See Trello documentation on [Power-ups](https://trello.readme.io/v1.0/reference#power-ups-intro) and their [administration](https://trello.com/power-ups/admin)
 
-## Advanced Installation
-TODO
+## Add Checklist Bot to the board
+Just select it in Trello power-up menu
+
+## Authorize the power-up
+Connect on the Trello account you want to start the bot with and press the "tool" icon associated to the Checklist power-up.
+Authorize the power-up. Watch out, the popup screen might be blocked by your brower and you need to authorize it.
+
+## Configure the location of the checklist templates
+Select "Edit Power-Up settings" and choose the location of the template board and the template list.
+By default, the template board can be located in the current board.
+By default, the template list should have mp
+
 
 ## About
 Powered by OCTO Technology, 2017
