@@ -67,7 +67,7 @@ board| Move the card to a list in another board | -> **board**(*boardName, listN
   |  |   | position (optional): location in the list the card will move. Possible values are **top** and **bottom** (default)
 archive| Archive a card. This action is reversible | -> **archive**()
 label| Add a label to the card. This action is reversible | -> **label**(*color, labelName*)
-  |  |   | color: one of Trello standard colors (red, yellow, green, ...) 
+  |  |   | color: one of Trello standard colors (blue, green, orange, purple, red, yellow, sky, lime, pink, black) 
   |  |   | labelName: a text to display in the label 
 
 ## Demo board
