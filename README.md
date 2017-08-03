@@ -60,11 +60,11 @@ Action | Description | Syntax
 ------------ | ------------- | ----------------
 list| Move the card to a list | -> **list**(*listName, position*)
   |  |   | listName: name of the target list
-  |  |   | position (optional): location in the list the card will move. Possible values are **top** and **bottom** (default)
+  |  |   | position (optional): *location in the list the card will move. Possible values are **top** and **bottom** (default)*
 board| Move the card to a list in another board | -> **board**(*boardName, listName, position*)
-  |  |   | boardName: name of the target board 
-  |  |   | listName: name of the target list 
-  |  |   | position (optional): location in the list the card will move. Possible values are **top** and **bottom** (default)
+  |  |   | boardName: *name of the target board *
+  |  |   | listName: *name of the target list *
+  |  |   | position (optional): *location in the list the card will move. Possible values are **top** and **bottom** (default)*
 archive| Archive a card. This action is reversible | -> **archive**()
 label| Add a label to the card. This action is reversible | -> **label**(*color, labelName*)
   |  |   | color: one of Trello standard colors (blue, green, orange, purple, red, yellow, sky, lime, pink, black) 
