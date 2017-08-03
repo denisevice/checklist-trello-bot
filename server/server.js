@@ -50,7 +50,7 @@ app.all("/webhooks", webhookController.allWebhooks);
 
 
 // listen for requests 
-var listener = app.listen(process.env.PORT, function () {
+var listener = app.listen(8081, function () {
   console.info(`Node Version: ${process.version}`);
   console.log('Check Bot by Octo Power-Up Server listening on port ' + listener.address().port);
 });

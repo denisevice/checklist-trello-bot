@@ -52,7 +52,7 @@ module.exports = {
          }
 
          //else if action_marked_checkitem_incomplete
-         res.end()
+         res.end();
 
     }
   
