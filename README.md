@@ -58,7 +58,8 @@ Checklist Bot can detect and launch the following actions:
 
 Action name | Description | Syntax 
 ------------ | ------------- | ----------------
-list| move the card to list "listname" at position bottom or top | list(listname, top)
+list| move the card to list "listName" at position (bottom or top) | list(listName, position ). Position argument is optional with bottom as the default value.
+board| move the card to board "boarName" and list "listName" at position (bottom or top) | board(boardName, listName, position ). Position argument is optional with bottom as the default value.
 
 ## Demo board
 If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board.
