@@ -44,7 +44,6 @@ function handleSingleCardAction(trello, webhookAction) {
 function handleGlobalBoardAction(trello, webhookAction, templateBoardId, templateListId) {
     console.log("handle", templateBoardId, templateListId)
     const data = webhookAction.data
-    const destCardId = data.card.id
 
     templateBoardId = templateBoardId == '' ? data.board.id : templateBoardId
     const sourceListIdPromise = templateListId == '' ? 

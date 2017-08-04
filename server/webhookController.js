@@ -31,7 +31,7 @@ module.exports = {
              return;
        
        
-         var type = req.body.action.display.translationKey;
+         const type = req.body.action.display.translationKey;
          //console.log(req.body.action)
         
          if(req.query.token === undefined) return;

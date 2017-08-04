@@ -24,10 +24,12 @@ module.exports = {
                 if (err) return reject(err)
 
                 lists.forEach(list => {
-                  if (list.name == listName)
-                    listId = list.id        
-                })
-                console.log('resolve getListId')
+                    if (list.name === listName)
+                        listId = list.id
+                });
+
+                if (listId === undefined)
+                    return reject("list " + listName + " not found in list " + listId)
                 resolve(listId)
             })
 
@@ -41,13 +43,16 @@ module.exports = {
             var cardId;
 
             trello.get("/1/lists/" + listId + "/cards/", function (err, cards) {
+                if (err) return reject(err);
+
                 cards.forEach(card => {
-                    if (card.name == cardName)
+                    if (card.name === cardName)
                         cardId = card.id
-                })
+                });
+
                 if (cardId === undefined)
                     return reject("card " + cardName + " not found in list " + listId)
-                resolve(cardId)
+                return resolve(cardId)
             })
         })
     },
@@ -66,80 +71,93 @@ module.exports = {
     },
 
 
-    getBoardIdFromBoardName : (trello, boardName) => {
+    getBoardIdFromBoardName: (trello, boardName) => {
         console.log("Getting board id", boardName)
 
         return new Promise((resolve, reject) => {
-            trello.get("/1/search", {query : boardName, modelTypes : 'boards', board_fields : 'id'}, function(err, data){
-                if(err) return reject(err);
-                if(data.boards[0] === undefined) return reject('not found');
-              
+            trello.get("/1/search", {query: boardName, modelTypes: 'boards', board_fields: 'id'}, function (err, data) {
+                if (err) return reject(err);
+                if (data.boards[0] === undefined) return reject('not found');
+
                 resolve(data.boards[0].id)
             })
 
         })
     },
 
-  moveCard : (trello, idCardSource, idListDest, idBoardDest, pos) => {
-    console.log("Moving ", idCardSource, "to list ", idListDest, " board ", idBoardDest)
-      
-    pos = pos ? pos : "bottom";
-    return new Promise((resolve, reject) => {
-        if(idCardSource === undefined || idListDest === undefined || idBoardDest === undefined) 
-          return reject('not found');
-      
-        trello.put("/1/cards/"+idCardSource, { idList : idListDest, idBoard : idBoardDest, pos : pos }, function(err){
-            if(err) return reject(err);
-            resolve()
+    moveCard: (trello, idCardSource, idListDest, idBoardDest, pos) => {
+        console.log("Moving ", idCardSource, "to list ", idListDest, " board ", idBoardDest)
+
+        pos = pos ? pos : "bottom";
+        return new Promise((resolve, reject) => {
+            if (idCardSource === undefined || idListDest === undefined || idBoardDest === undefined)
+                return reject('not found');
+
+            trello.put("/1/cards/" + idCardSource, {
+                idList: idListDest,
+                idBoard: idBoardDest,
+                pos: pos
+            }, function (err) {
+                if (err) return reject(err);
+                resolve()
+            })
+
         })
+    },
 
-    })
-  },
-  
-  
-  archiveCard : (trello, cardId, closed) => {
-    var closed = closed === undefined ? true : closed;
-    console.log(closed ? "archiving" : "sending back", cardId)
 
-    return new Promise((resolve, reject) => {
-        trello.put("/1/cards/"+cardId, {closed : closed}, function(err){
-            if(err) return reject(err);
-            resolve();
+    archiveCard: (trello, cardId, closed) => {
+        var closed = closed === undefined ? true : closed;
+        console.log(closed ? "archiving" : "sending back", cardId)
+
+        return new Promise((resolve, reject) => {
+            trello.put("/1/cards/" + cardId, {closed: closed}, function (err) {
+                if (err) return reject(err);
+                resolve();
+            })
+
         })
+    },
 
-    })  
-  },
+    addLabel: (trello, cardId, color, text) => {
+        console.log("add label for", cardId, color, text)
 
- addLabel : (trello, cardId, color, text) => {
-  console.log("add label for", cardId, color, text)
-  
-  return new Promise((resolve, reject) => {
-      trello.post("/1/cards/"+cardId+'/labels', {color : color, name : text ? text : ""}, function(err){
-          if(err) return reject(err);
-          resolve();
-      })
+        return new Promise((resolve, reject) => {
+            trello.post("/1/cards/" + cardId + '/labels', {color: color, name: text ? text : ""}, function (err) {
+                if (err) return reject(err);
+                resolve();
+            })
 
-  })
-},
+        })
+    },
 
-getLabels : (trello, cardId) => {
-  return new Promise((resolve, reject) => {
-      trello.get("/1/cards/"+cardId, {fields : 'labels'}, function(err, data){
-          if(err) return reject(err);
-          resolve(data);
-      })
-  })
-}, 
+    getLabels: (trello, cardId) => {
+        return new Promise((resolve, reject) => {
+            trello.get("/1/cards/" + cardId, {fields: 'labels'}, function (err, data) {
+                if (err) return reject(err);
+                resolve(data);
+            })
+        })
+    },
 
-deleteLabel : (trello, cardId, labelId) => {
-    return new Promise((resolve, reject) => {
-      trello.del("/1/cards/"+cardId+'/idLabels/'+labelId, function(err, data){
-          if(err) return reject(err);
-          resolve(data);
-      })
-  })
-},
-  
+    deleteLabel: (trello, cardId, labelId) => {
+        return new Promise((resolve, reject) => {
+            trello.del("/1/cards/" + cardId + '/idLabels/' + labelId, function (err, data) {
+                if (err) return reject(err);
+                resolve(data);
+            })
+        })
+    },
+
+    moveCardFromCommand : (trello, cardId, boardId, listName, pos) => {
+
+    console.log("found boardId", boardId);
+    this.getListIdFromListName(trello, boardId, listName)
+        .then(function (list) {
+            return trelloHelper.moveCard(trello, cardId, list, boardId, pos)
+        }).catch(e => console.log(e))
+}
+
 
 } //module exports
 
