@@ -11,24 +11,61 @@ chai.use(chaiAsPromised);
 const sinon = require('sinon');
 
 
+const listCommandMock = sinon.mock(require('./commands/listCommand')),
+    labelCommandMock = sinon.mock(require('./commands/labelCommand')),
+    boardCommandMock = sinon.mock(require('./commands/boardCommand')),
+    archiveCommandMock = sinon.mock(require('./commands/archiveCommand'))
+
+
 
 describe('commandUseCase', () => {
+
     describe('handleItemChecked', () => {
+
+        beforeEach(function() {
+            listCommandMock.restore();
+            listCommandMock.expects("checked").never();
+
+            labelCommandMock.restore();
+            labelCommandMock.expects("checked").never();
+            labelCommandMock.expects("unchecked").never();
+
+            boardCommandMock.restore();
+            boardCommandMock.expects("checked").never();
+
+            archiveCommandMock.restore();
+            archiveCommandMock.expects("checked").never();
+            archiveCommandMock.expects("unchecked").never();
+        })
+
+        var verifyAllCommandMocks = function() {
+            listCommandMock.verify();
+            labelCommandMock.verify();
+            boardCommandMock.verify();
+            archiveCommandMock.verify();
+        }
+
+        var proxyquireCommands = function() {
+            return proxyquire('./commandUseCase', {
+                './commands/listCommand' : listCommandMock,
+                './commands/labelCommand' : labelCommandMock,
+                './commands/boardCommand' : boardCommandMock,
+                './commands/archiveCommand' : archiveCommandMock,
+            })
+        }
 
         describe('should call list', () => {
             it('list checked', () => {
 
                 // Given
                 const webhookAction = getWebhookAction('command -> list(List)', true);
-                const listCommandMock = sinon.mock(require('./commands/listCommand'));
                 listCommandMock.expects("checked").once().withArgs({}, webhookAction.data, ['List']);
-                const commandUseCase = proxyquire('./commandUseCase', { './commands/listCommand' : listCommandMock })
 
                 // When
-                commandUseCase.handleItemChecked({}, webhookAction)
+                proxyquireCommands().handleItemChecked({}, webhookAction)
 
                 // Then
-                listCommandMock.verify()
+                verifyAllCommandMocks();
 
             });
         });
@@ -39,14 +76,13 @@ describe('commandUseCase', () => {
 
                 // Given
                 const webhookAction = getWebhookAction('command -> label(color, name)', true);
-                const checkedStub = sinon.stub().withArgs({}, webhookAction.data, ['color', 'name']).returns({});
+                labelCommandMock.expects("checked").once().withArgs({}, webhookAction.data, ['color', 'name']);
 
                 // When
-                const labelCommandStub = { 'unchecked' : sinon.stub().throws('unchecked'), 'checked' : checkedStub };
+                proxyquireCommands().handleItemChecked({}, webhookAction)
 
                 // Then
-                const commandUseCase = proxyquire('./commandUseCase', { './commands/labelCommand' : labelCommandStub })
-                commandUseCase.handleItemChecked({}, webhookAction)
+                verifyAllCommandMocks();
 
             });
 
@@ -54,14 +90,13 @@ describe('commandUseCase', () => {
 
                 // Given
                 const webhookAction = getWebhookAction('command -> label(color, name)', false);
-                const uncheckedStub = sinon.stub().withArgs({}, webhookAction.data, ['color', 'name']).returns({});
+                labelCommandMock.expects("unchecked").once().withArgs({}, webhookAction.data, ['color', 'name']);
 
                 // When
-                const labelCommandStub = { 'unchecked' : uncheckedStub, 'checked' : sinon.stub().throws() };
+                proxyquireCommands().handleItemChecked({}, webhookAction)
 
                 // Then
-                const commandUseCase = proxyquire('./commandUseCase', { './commands/labelCommand' : labelCommandStub })
-                commandUseCase.handleItemChecked({}, webhookAction)
+                verifyAllCommandMocks();
 
             });
         });

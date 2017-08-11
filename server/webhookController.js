@@ -14,11 +14,12 @@
 const Trello = require('node-trello');
 const Promise = require('bluebird');
 const templateUseCase = require('./templateUseCase');
-const commandUseCase = require('./commandUseCase');
 const trelloHelper = require('./trelloHelper');
+const commandUseCase = require('./commandUseCase');
+
 
 module.exports = {
-    
+
      allWebhooks : (req, res) => {
 
          res.setHeader('Content-Type', 'text')
@@ -26,17 +27,17 @@ module.exports = {
              res.end();
              return;
          }
-       
+
          if (checkDisableWebhook(req, res))
              return;
-       
-       
+
+
          const type = req.body.action.display.translationKey;
          //console.log(req.body.action)
-        
+
          if(req.query.token === undefined) return;
          const trello = new Trello(process.env.APIKEY, req.query.token);
-       
+
          const webhookAction = req.body.action;
 
          if (type === "action_move_card_from_list_to_list" || type === "action_create_card" || type === "action_add_attachment_to_card") {
@@ -55,11 +56,10 @@ module.exports = {
          res.end();
 
     }
-  
+
 
 
 }
-
 
 
 
