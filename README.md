@@ -64,16 +64,15 @@ board| Move the card to a list in another board | -> **board**(*boardName, listN
   | |   | **listName**: *name of the target list*
   | |   | **position** (optional): *location in the list the card will move. Possible values are **top** and **bottom** (default)*
 archive| Archive a card. This action is reversible | -> **archive**()
-joinCard| Add a user or a team to the current card using its short (signle word) name | -> **joinCard**(*username or team_short_name*)
-leaveCard| Remove a user or a team from the current card | -> **leaveCard**(*username or team_short_name*)
-joinBoard| Add a user or a team to the current board | -> **joinBoard**(*username or team_short_name*)
-leaveBoard| Remove a user or a team from the current board | -> **leaveBoard**(*username or team_short_name*)
-joinAttachedBoards| Add a user or a team to the Trello boards associated to the current card via an attachment  | -> **joinBoard**(*username or team_short_name*)
-leaveAttachedBoards| Remove user or a team to the Trello boards associated to the current card via an attachment | -> **leaveBoard**(*username or team_short_name*)
-archive| Archive a card. This action is reversible | -> **archive**()
 label| Add a label to the card. This action is reversible | -> **label**(*color, labelName*)
   | |   | **color**: *one of Trello standard colors (blue, green, orange, purple, red, yellow, sky, lime, pink, black)* 
   | |   | **labelName**: *a text to display in the label* 
+joinCard| Add a user or a team to the current card using its short (single word) name | -> **joinCard**(*username or team_short_name*)
+leaveCard| Remove a user or a team from the current card | -> **leaveCard**(*username or team_short_name*)
+joinBoard| Add a user or a team to the current board using its short (single word) name| -> **joinBoard**(*username or team_short_name*)
+leaveBoard| Remove a user or a team from the current board | -> **leaveBoard**(*username or team_short_name*)
+joinAttachedBoards| Add a user or a team to the Trello boards associated to the current card via an attachment  | -> **joinBoard**(*username or team_short_name*)
+leaveAttachedBoards| Remove user or a team to the Trello boards associated to the current card via an attachment | -> **leaveBoard**(*username or team_short_name*)
 
 ## Check out our demo board!
 If you want to try it, please make a copy of [Hiring Process](https://trello.com/b/36AnQeAb/hiring-process-checklist-bot-power-up-demo) board.
