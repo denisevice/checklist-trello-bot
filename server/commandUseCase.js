@@ -67,7 +67,25 @@ module.exports = {
                 break;
               case "archive":
                   execArchive(trello, webhookData);
-                break;
+                  break;
+              case "joinCard":
+                  execJoinCard(trello, webhookData, args);
+                  break;
+              case "leaveCard":
+                  execLeaveCard(trello, webhookData, args);
+                  break;
+              case "joinBoard":
+                  execJoinBoard(trello, webhookData, args);
+                  break;
+              case "leaveBoard":
+                  execLeaveBoard(trello, webhookData, args);
+                  break;
+              case "joinAttachedBoards":
+                  execJoinAttachedBoards(trello, webhookData, args);
+                  break;
+              case "leaveAttachedBoards":
+                  execLeaveAttachedBoards(trello, webhookData, args);
+                  break;
 
           }
         }
@@ -146,9 +164,57 @@ function execLabel(trello, webhookData, args){
 }
 
 function execArchive(trello, webhookData){
-  const cardId = webhookData.card.id;
-  
-  return trelloHelper.archiveCard(trello, cardId, true);
+    const cardId = webhookData.card.id;
+
+    return trelloHelper.archiveCard(trello, cardId, true);
+}
+
+function execJoinCard(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.joinCard(trello, cardId, boardId, member);
+}
+
+function execLeaveCard(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.leaveCard(trello, cardId, boardId, member);
+}
+
+function execJoinBoard(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.joinBoard(trello, cardId, boardId, member);
+}
+
+function execLeaveBoard(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.leaveBoard(trello, cardId, boardId, member);
+}
+
+function execJoinAttachedBoards(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.joinAttachedBoards(trello, cardId, boardId, member);
+}
+
+function execLeaveAttachedBoards(trello, webhookData, args){
+    const cardId = webhookData.card.id;
+    const boardId = webhookData.board.id;
+    const member = args[0];
+
+    return trelloHelper.leaveAttachedBoards(trello, cardId, boardId, member);
 }
 
 function execUnarchive(trello, webhookData){
