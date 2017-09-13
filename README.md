@@ -64,10 +64,12 @@ board| Move the card to a list in another board | -> **board**(*boardName, listN
   | |   | **listName**: *name of the target list*
   | |   | **position** (optional): *location in the list the card will move. Possible values are **top** and **bottom** (default)*
 archive| Archive a card. This action is reversible | -> **archive**()
-joinCard| Add a member or a team to the current card | -> **joinCard**(*username or teamname*)
-leaveCard| Remove a member or a team from the current card | -> **leaveCard**(*username or teamname*)
-joinBoard| Add a member or a team to the current board | -> **joinBoard**(*username or teamname*)
-leaveBoard| Remove a member or a team from the current board | -> **leaveBoard**(*username or teamname*)
+joinCard| Add a user or a team to the current card using its short (signle word) name | -> **joinCard**(*username or team_short_name*)
+leaveCard| Remove a user or a team from the current card | -> **leaveCard**(*username or team_short_name*)
+joinBoard| Add a user or a team to the current board | -> **joinBoard**(*username or team_short_name*)
+leaveBoard| Remove a user or a team from the current board | -> **leaveBoard**(*username or team_short_name*)
+joinAttachedBoards| Add a user or a team to the Trello boards associated to the current card via an attachment  | -> **joinBoard**(*username or team_short_name*)
+leaveAttachedBoards| Remove user or a team to the Trello boards associated to the current card via an attachment | -> **leaveBoard**(*username or team_short_name*)
 archive| Archive a card. This action is reversible | -> **archive**()
 label| Add a label to the card. This action is reversible | -> **label**(*color, labelName*)
   | |   | **color**: *one of Trello standard colors (blue, green, orange, purple, red, yellow, sky, lime, pink, black)* 
